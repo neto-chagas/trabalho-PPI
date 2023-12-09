@@ -1,0 +1,22 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+form div p {
+  color: red;
+}
+
+#users-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+#users-table th,
+#users-table td {
+  padding: 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
