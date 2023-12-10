@@ -268,3 +268,5 @@ app.listen(PORT, () => {
   console.log(`Servidor executando na porta: ${PORT}
 Acessar http://localhost:${PORT}/`);
 });
+
+module.exports = app;
