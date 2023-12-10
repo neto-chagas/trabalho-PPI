@@ -63,7 +63,7 @@ function html(req, content, options = {}) {
 }
 
 // Configura o servidor para servir arquivos estáticos da pasta "static"
-app.use("/static", express.static(path.resolve(__dirname, "../static")));
+app.use("/static", express.static("static"));
 
 const TRINTA_MINUTOS = 1000 * 60 * 30;
 
