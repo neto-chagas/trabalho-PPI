@@ -4,8 +4,10 @@
   "description": "Trabalho Final da Matéria de Programação Para Internet",
   "main": "index.js",
   "scripts": {
+    "prep": "npm install",
     "dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "build": "npm run prep && npm run start"
   },
   "keywords": [],
   "author": "",
