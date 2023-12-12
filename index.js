@@ -19,6 +19,12 @@ const users = [];
 // Lista de mensagens enviadas no bate papo com informações do usuário e data de envio
 const messages = [];
 
+function helloUser(session) {
+  return /*html*/ `<div class="col">Olá, ${session.username} - Último login: ${new Date(
+    session.lastLogin
+  ).toLocaleString()}</div>`;
+}
+
 // Retorna o conteúdo HTML da página
 function html(req, content, options = {}) {
   const title = options.title ?? "Página";
@@ -36,25 +42,24 @@ function html(req, content, options = {}) {
 
       </head>
       <body>
-        <nav>
-          <ul>
-          ${
-            session
-              ? /*html*/ `<li>Olá, ${
-                  session.username
-                } - Último login: ${new Date(
-                  session.lastLogin
-                ).toLocaleString()}</li>
-                <li><a href="/">Home</a></li>
-                <li><a href="/logout">Sair</a></li>
-                <li><a href="/cadastro">Cadastro de usuários</a></li>
-                <li><a href="/batepapo">Bate papo</a></li>`
-              : ""
-          }
-          </ul>
-        </nav>
-
-        ${content}
+        <header class="container d-flex justify-content-between">
+          <h1>${title}</h1>
+          <nav class="row gx-1 text-center">
+            ${
+              session
+                ? /*html*/ `
+                  <div class="col"><a href="/">Home</a></div>
+                  <div class="col"><a href="/logout">Sair</a></div>
+                  <div class="col"><a href="/cadastro">Cadastro de usuários</a></div>
+                  <div class="col"><a href="/batepapo">Bate papo</a></div>
+                  ${helloUser(session)}`
+                : ""
+            }
+          </nav>
+        </header>
+        <main class="container">
+          ${content}
+        </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
       </body>
@@ -100,7 +105,6 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
   const content = /*html*/ `
-    <h1>Login</h1>
     <form action="/login" method="POST">
       <label for="username">Usuário</label>
       <input type="text" name="username" placeholder="Usuário" id="username" />
